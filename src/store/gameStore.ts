@@ -80,7 +80,7 @@ export const useGameStore = create<GameState>((set, get) => ({
   sessionId: null,
   currentPlayer: null,
   session: null,
-  status: 'waiting',
+  status: 'idle', // Changed from 'waiting' - 'idle' means no game started yet
   currentRound: 0,
   currentLetter: null,
   letterPickerId: null,
