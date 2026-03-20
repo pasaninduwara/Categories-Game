@@ -24,9 +24,18 @@ export const App: React.FC = () => {
     }
   }, [telegram.isReady, telegram.startParam]);
 
-  // Update screen based on game status
+  // Update screen based on game status and session
   useEffect(() => {
+    // If no session, always show welcome screen
+    if (!game.sessionId) {
+      setScreen('welcome');
+      return;
+    }
+    
     switch (game.status) {
+      case 'idle':
+        setScreen('welcome');
+        break;
       case 'waiting':
         setScreen('lobby');
         break;
@@ -46,7 +55,7 @@ export const App: React.FC = () => {
       default:
         setScreen('welcome');
     }
-  }, [game.status]);
+  }, [game.status, game.sessionId]);
 
   // Handle join from link
   const handleJoinFromLink = async (code: string) => {
@@ -309,5 +318,3 @@ const JoinGameForm: React.FC<{
     </form>
   );
 };
-
-export default App;
