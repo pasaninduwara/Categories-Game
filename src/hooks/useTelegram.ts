@@ -38,15 +38,23 @@ export function useTelegram(): UseTelegramResult {
   const [themeColors, setThemeColors] = useState<Record<string, string>>({});
 
   useEffect(() => {
+    console.log('[useTelegram] Initializing Telegram Mini App...');
+    
     // Initialize Telegram Mini App
     initTelegramApp();
     
+    // Check if we're in Telegram environment
+    const inTelegram = isTelegramEnvironment();
+    console.log('[useTelegram] In Telegram environment:', inTelegram);
+    
     // Get user info
     const telegramUser = getTelegramUser();
+    console.log('[useTelegram] Got user:', telegramUser);
     setUser(telegramUser);
     
     // Get start parameter (for joining games via link)
     const param = getStartParam();
+    console.log('[useTelegram] Start param:', param);
     setStartParam(param);
     
     // Get platform
@@ -57,6 +65,7 @@ export function useTelegram(): UseTelegramResult {
     
     // Mark as ready
     setIsReady(true);
+    console.log('[useTelegram] Initialization complete');
     
     // Auto-expand to fullscreen
     expandApp();
