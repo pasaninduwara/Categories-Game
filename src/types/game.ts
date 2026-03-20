@@ -35,6 +35,7 @@ export interface GameSettings {
 }
 
 export type GameStatus = 
+  | 'idle'        // No game session (welcome screen)
   | 'waiting'     // Waiting for players to join
   | 'selecting'   // Letter selection phase
   | 'playing'     // Active round
